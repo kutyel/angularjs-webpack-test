@@ -1,0 +1,37 @@
+<div class="users">
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <h1>List of users</h1>
+    </li>
+    <li class="collection-item">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in $ctrl.usersList | orderBy: '-name'">
+            <td>
+              <a ui-sref="user-detail({id: {{ user.id }} })">
+                <span ng-bind="user.name"></span>
+              </a>
+            </td>
+            <td><span ng-bind="user.username"></span></td>
+            <td>
+              <a ng-href="mailto:{{ user.email | lowercase }}">
+                <span ng-bind="user.email | lowercase"></span>
+              </a>
+            </td>
+            <td>
+              <user-address user="user"></user-address>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+</div>

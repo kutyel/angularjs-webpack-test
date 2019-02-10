@@ -1,0 +1,7 @@
+@import '../app/components/users/users-list/users-list.css';
+@import '../app/components/users/user-address/user-address.css';
+@import '../app/components/users/user-detail/user-detail.css';
+
+.views {
+  min-height: 75vh;
+}

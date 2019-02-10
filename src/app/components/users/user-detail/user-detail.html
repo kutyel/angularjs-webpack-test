@@ -1,0 +1,23 @@
+<div class="user-detail">
+  <a ui-sref="users" class="waves-effect waves-light btn">&lt; BACK</a>
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title" ng-bind="$ctrl.user.name"></span>
+        <p>
+          <strong>Username:</strong> <span ng-bind="$ctrl.user.username"></span>
+        </p>
+        <p><strong>Phone:</strong> <span ng-bind="$ctrl.user.phone"></span></p>
+        <p>
+          <strong>Work:</strong>
+          <span ng-bind="$ctrl.user.company.name"></span>
+          <small>({{ $ctrl.user.company.bs }})</small>
+          <p></p><span ng-bind="$ctrl.user.company.catchPhrase"></span></p>
+        </p>
+      </div>
+      <div class="card-action">
+        <a href="{{ $ctrl.user.website }}">{{ $ctrl.user.website }}</a>
+      </div>
+    </div>
+  </div>
+</div>
