@@ -1,22 +1,21 @@
-'use strict'
+import { resolve } from 'path'
+import { optimize, NoErrorsPlugin } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
 
-module.exports = {
+export default {
   entry: {
     app: './src/app/app.js',
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: resolve(__dirname, './dist'),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
-    filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
-    chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+    filename: `[name].${isProd ? '[hash]' : 'bundle'}.js`,
+    chunkFilename: `[name].${isProd ? '[hash]' : 'bundle'}.js`,
   },
-  devtool: isProd ? 'source-map' : 'eval-source-map',
+  devtool: `${isProd ? '' : 'eval-'}source-map`,
   resolve: {
     modulesDirectories: ['node_modules', 'src/'],
   },
@@ -52,13 +51,13 @@ module.exports = {
   ].concat(
     isProd
       ? [
-          new webpack.NoErrorsPlugin(),
-          new webpack.optimize.DedupePlugin(),
-          new webpack.optimize.UglifyJsPlugin(),
+          new NoErrorsPlugin(),
+          new optimize.DedupePlugin(),
+          new optimize.UglifyJsPlugin(),
           new CopyWebpackPlugin(
             [
               {
-                from: path.resolve(__dirname, './src'),
+                from: resolve(__dirname, './src'),
               },
             ],
             { ignore: ['*.html'] }
